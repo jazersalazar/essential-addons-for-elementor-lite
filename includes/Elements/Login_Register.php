@@ -5456,7 +5456,7 @@ class Login_Register extends Widget_Base {
 
 		if ( ! current_user_can( 'manage_options' ) && 'yes' === $this->get_settings_for_display( 'redirect_for_logged_in_user' ) && is_user_logged_in() ) {
 			if ( $redirect = $this->get_settings_for_display( 'redirect_url_for_logged_in_user' )['url'] ) {
-				$redirect = wp_sanitize_redirect( $redirect );
+				$redirect = wp_sanitize_redirect( do_shortcode( $redirect ) );
 				$logged_in_location = wp_validate_redirect( $redirect, site_url() ); ?>
                 <div class="" data-logged-in-location="<?php echo empty( $logged_in_location ) ? '' : esc_url( $logged_in_location ); ?>"></div>
 				<?php
@@ -6496,7 +6496,7 @@ class Login_Register extends Widget_Base {
 				?>
                 <input type="hidden"
                        name="redirect_to"
-                       value="<?php echo esc_attr( $this->login_custom_redirect_url ); ?>">
+                       value="<?php echo esc_attr( do_shortcode( $this->login_custom_redirect_url ) ); ?>">
 			<?php }
 
 			if ( ! empty( $this->ds['redirect_based_on_roles'] ) && 'yes' === $this->ds['redirect_based_on_roles'] ) {
@@ -6508,7 +6508,7 @@ class Login_Register extends Widget_Base {
 						?>
 						<input type="hidden"
 							name="redirect_to_<?php echo esc_html( $user_role_key ); ?>"
-							value="<?php echo esc_attr( $login_redirect_url ); ?>">
+							value="<?php echo esc_attr( do_shortcode( $login_redirect_url ) ); ?>">
 						<?php
 					}
 				}
@@ -6521,7 +6521,7 @@ class Login_Register extends Widget_Base {
 				?>
                 <input type="hidden"
                        name="resetpassword_redirect_to"
-                       value="<?php echo esc_attr( $resetpassword_redirect_url ); ?>">
+                       value="<?php echo esc_attr( do_shortcode( $resetpassword_redirect_url ) ); ?>">
 			<?php }
 		}
 
